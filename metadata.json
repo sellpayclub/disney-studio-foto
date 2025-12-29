@@ -1,0 +1,7 @@
+{
+  "name": "Studio Disney Magic",
+  "description": "Transforme fotos de crianças em seus personagens favoritos da Disney usando IA generativa.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
