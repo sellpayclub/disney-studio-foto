@@ -14,7 +14,8 @@ const App: React.FC = () => {
     // Check path on mount safely
     try {
       const path = window.location.pathname;
-      if (path === '/landpage' || path.endsWith('/landpage')) {
+      // Aceita /landpage, /LandingPage ou qualquer variação que termine com isso
+      if (path === '/landpage' || path === '/LandingPage' || path.endsWith('/LandingPage') || path.endsWith('/landpage')) {
         setShowLanding(true);
       }
     } catch (e) {
@@ -31,16 +32,6 @@ const App: React.FC = () => {
       console.warn("Navigation update failed", e);
     }
     setShowLanding(false);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const handleGoToLanding = () => {
-    try {
-      window.history.pushState({}, '', '/landpage');
-    } catch (e) {
-      console.warn("Navigation update failed", e);
-    }
-    setShowLanding(true);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -228,17 +219,6 @@ const App: React.FC = () => {
             </p>
           </div>
         )}
-
-        {/* Link para visualização da Landing Page (Dev Mode) */}
-        <div className="text-center mt-12 mb-6 border-t pt-8 border-purple-200">
-             <p className="text-sm text-gray-500 mb-2">Área de Visualização</p>
-             <button
-               onClick={handleGoToLanding}
-               className="text-fun-pink font-bold hover:text-purple-600 transition-colors bg-white px-4 py-2 rounded-full shadow-sm border border-purple-100"
-             >
-               Ver Página de Vendas (Landing Page) 🚀
-             </button>
-        </div>
 
       </main>
     </div>
