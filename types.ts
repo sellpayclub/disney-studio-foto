@@ -8,7 +8,6 @@ export interface Character {
   colorFrom: string;
   colorTo: string;
   icon: string; // Emoji or simple representation
-  imageUrl: string; // URL da imagem de capa do card
 }
 
 export enum AppState {
