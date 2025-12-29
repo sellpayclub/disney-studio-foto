@@ -45,13 +45,14 @@ const compressImage = async (file: File): Promise<string> => {
 
 export const generateDisneyImage = async (
   imageFile: File,
-  character: Character
+  character: Character,
+  apiKey: string
 ): Promise<string> => {
-  if (!process.env.API_KEY) {
-    throw new Error("Chave de API não configurada. Por favor, configure sua API Key.");
+  if (!apiKey) {
+    throw new Error("Chave de API necessária. Configure nas configurações (ícone de engrenagem).");
   }
 
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+  const ai = new GoogleGenAI({ apiKey: apiKey });
   
   try {
     // Redimensiona a imagem para evitar payloads gigantes
@@ -119,7 +120,7 @@ export const generateDisneyImage = async (
     
     // Tratamento específico para erro de Cota (429)
     if (error.message && (error.message.includes("429") || error.message.includes("Quota") || error.message.includes("RESOURCE_EXHAUSTED"))) {
-      throw new Error("Muitos pedidos mágicos ao mesmo tempo! 🪄 A fada madrinha precisa descansar por 30 segundos. Por favor, aguarde um pouquinho e tente de novo.");
+      throw new Error("Cota excedida! 🚨 Muitas pessoas usando ao mesmo tempo. Clique na engrenagem ⚙️ no topo e use sua própria API Key do Google (é grátis) para continuar sem filas.");
     }
 
     // Tratamento para imagem recusada (Safety)

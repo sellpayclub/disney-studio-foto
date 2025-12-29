@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import ImageUpload from './components/ImageUpload';
 import CharacterSelector from './components/CharacterSelector';
+import ApiKeyModal from './components/ApiKeyModal';
 import { Character, AppState } from './types';
 import { generateDisneyImage } from './services/geminiService';
 
@@ -11,6 +12,26 @@ const App: React.FC = () => {
   const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null);
   const [resultImage, setResultImage] = useState<string | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  
+  // API Key Management
+  const [apiKey, setApiKey] = useState<string>('');
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+
+  useEffect(() => {
+    // Tenta carregar do localStorage, ou usa a env var padrão
+    const storedKey = localStorage.getItem('disney_magic_key');
+    const defaultKey = process.env.API_KEY || '';
+    setApiKey(storedKey || defaultKey);
+  }, []);
+
+  const handleSaveKey = (key: string) => {
+    setApiKey(key);
+    if (key) {
+      localStorage.setItem('disney_magic_key', key);
+    } else {
+      localStorage.removeItem('disney_magic_key');
+    }
+  };
 
   const handleImageSelect = (file: File) => {
     setSelectedImage(file);
@@ -34,7 +55,8 @@ const App: React.FC = () => {
     setErrorMsg(null);
 
     try {
-      const generatedUrl = await generateDisneyImage(selectedImage, selectedCharacter);
+      // Passa a API Key atual para o serviço
+      const generatedUrl = await generateDisneyImage(selectedImage, selectedCharacter, apiKey);
       setResultImage(generatedUrl);
       setAppState(AppState.SUCCESS);
       
@@ -65,7 +87,14 @@ const App: React.FC = () => {
       <div className="absolute top-40 right-10 text-6xl opacity-20 animate-pulse pointer-events-none">✨</div>
       <div className="absolute bottom-20 left-20 text-6xl opacity-20 animate-wiggle pointer-events-none">🍭</div>
 
-      <Header />
+      <Header onOpenSettings={() => setIsSettingsOpen(true)} />
+
+      <ApiKeyModal 
+        isOpen={isSettingsOpen} 
+        onClose={() => setIsSettingsOpen(false)} 
+        currentKey={apiKey}
+        onSave={handleSaveKey}
+      />
 
       <main className="max-w-4xl mx-auto p-4 space-y-10 relative z-10">
         
@@ -137,9 +166,12 @@ const App: React.FC = () => {
 
         {/* Error Message */}
         {errorMsg && (
-          <div className="bg-red-100 border-4 border-red-300 text-red-600 p-6 rounded-3xl text-center shadow-lg transform rotate-1 animate-wiggle">
+          <div className="bg-red-100 border-4 border-red-300 text-red-600 p-6 rounded-3xl text-center shadow-lg transform rotate-1 animate-wiggle cursor-pointer" onClick={() => setIsSettingsOpen(true)}>
             <p className="font-bold text-xl">😢 Poxa vida!</p>
             <p>{errorMsg}</p>
+            {errorMsg.includes("Cota") && (
+              <p className="mt-2 text-sm underline">Toque aqui para configurar sua chave e resolver.</p>
+            )}
           </div>
         )}
 
