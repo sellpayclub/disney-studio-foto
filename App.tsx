@@ -1,11 +1,49 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import ImageUpload from './components/ImageUpload';
 import CharacterSelector from './components/CharacterSelector';
+import LandingPage from './components/LandingPage';
 import { Character, AppState } from './types';
 import { generateDisneyImage } from './services/geminiService';
 
 const App: React.FC = () => {
+  // Simple routing state
+  const [showLanding, setShowLanding] = useState(false);
+
+  useEffect(() => {
+    // Check path on mount safely
+    try {
+      const path = window.location.pathname;
+      if (path === '/landpage' || path.endsWith('/landpage')) {
+        setShowLanding(true);
+      }
+    } catch (e) {
+      console.warn("Routing check failed", e);
+    }
+  }, []);
+
+  const handleGoToApp = () => {
+    try {
+      // Safe navigation attempting to reset to root
+      window.history.pushState({}, '', '/');
+    } catch (e) {
+      // Fallback if pushState is blocked
+      console.warn("Navigation update failed", e);
+    }
+    setShowLanding(false);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleGoToLanding = () => {
+    try {
+      window.history.pushState({}, '', '/landpage');
+    } catch (e) {
+      console.warn("Navigation update failed", e);
+    }
+    setShowLanding(true);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const [appState, setAppState] = useState<AppState>(AppState.IDLE);
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null);
@@ -59,6 +97,12 @@ const App: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  // Render Landing Page if active
+  if (showLanding) {
+    return <LandingPage onGoToApp={handleGoToApp} />;
+  }
+
+  // Render Main App
   return (
     <div className="min-h-screen pb-24 relative overflow-hidden">
       {/* Decorative Background Elements */}
@@ -184,6 +228,17 @@ const App: React.FC = () => {
             </p>
           </div>
         )}
+
+        {/* Link para visualização da Landing Page (Dev Mode) */}
+        <div className="text-center mt-12 mb-6 border-t pt-8 border-purple-200">
+             <p className="text-sm text-gray-500 mb-2">Área de Visualização</p>
+             <button
+               onClick={handleGoToLanding}
+               className="text-fun-pink font-bold hover:text-purple-600 transition-colors bg-white px-4 py-2 rounded-full shadow-sm border border-purple-100"
+             >
+               Ver Página de Vendas (Landing Page) 🚀
+             </button>
+        </div>
 
       </main>
     </div>
