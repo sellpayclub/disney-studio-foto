@@ -1,5 +1,10 @@
 import { Character } from './types';
 
+// O prefixo https://images.weserv.nl/?url= serve para garantir que a imagem carregue
+// e não seja bloqueada pelo site original (CORS/Hotlink protection).
+const PROXY = 'https://images.weserv.nl/?url=';
+const OPT = '&w=500&h=500&fit=cover&a=top'; // Otimização de tamanho e corte
+
 export const CHARACTERS: Character[] = [
   {
     id: 'elsa',
@@ -11,7 +16,8 @@ export const CHARACTERS: Character[] = [
     colorFrom: 'from-blue-400',
     colorTo: 'to-cyan-200',
     icon: '❄️',
-    imageUrl: 'https://upload.wikimedia.org/wikipedia/en/5/5e/Elsa_from_Disney%27s_Frozen.png'
+    // Imagem oficial Frozen 2
+    imageUrl: `${PROXY}lumiere-a.akamaihd.net/v1/images/6d7454cea6644379adc7e529c5790a28078a2823.jpeg${OPT}`
   },
   {
     id: 'woody',
@@ -23,7 +29,8 @@ export const CHARACTERS: Character[] = [
     colorFrom: 'from-yellow-600',
     colorTo: 'to-red-400',
     icon: '🤠',
-    imageUrl: 'https://upload.wikimedia.org/wikipedia/en/0/01/Sheriff_Woody.png'
+    // Poster Toy Story 4
+    imageUrl: `${PROXY}lumiere-a.akamaihd.net/v1/images/p_toystory4_19639_55272a05.jpeg${OPT}`
   },
   {
     id: 'ariel',
@@ -35,7 +42,8 @@ export const CHARACTERS: Character[] = [
     colorFrom: 'from-teal-400',
     colorTo: 'to-purple-400',
     icon: '🧜‍♀️',
-    imageUrl: 'https://upload.wikimedia.org/wikipedia/en/7/77/Ariel_disney.png'
+    // Live Action Art
+    imageUrl: `${PROXY}lumiere-a.akamaihd.net/v1/images/p_thelittlemermaid_2023_7df938fc.jpeg${OPT}`
   },
   {
     id: 'spiderman',
@@ -47,7 +55,8 @@ export const CHARACTERS: Character[] = [
     colorFrom: 'from-red-600',
     colorTo: 'to-blue-600',
     icon: '🕷️',
-    imageUrl: 'https://upload.wikimedia.org/wikipedia/en/2/21/Web_of_Spider-Man_Vol_1_129-1.png'
+    // No Way Home Suit
+    imageUrl: `${PROXY}terrigen-cdn-dev.marvel.com/content/prod/1x/snh_online_6072x9000_posed_01.jpg${OPT}`
   },
   {
     id: 'ironman',
@@ -59,7 +68,8 @@ export const CHARACTERS: Character[] = [
     colorFrom: 'from-red-500',
     colorTo: 'to-yellow-500',
     icon: '🦾',
-    imageUrl: 'https://upload.wikimedia.org/wikipedia/en/4/47/Iron_Man_%28circa_2018%29.png'
+    // Endgame Armor
+    imageUrl: `${PROXY}terrigen-cdn-dev.marvel.com/content/prod/1x/002irm_ons_mas_mob_01_0.jpg${OPT}`
   },
   {
     id: 'moana',
@@ -71,7 +81,8 @@ export const CHARACTERS: Character[] = [
     colorFrom: 'from-orange-400',
     colorTo: 'to-teal-400',
     icon: '🌊',
-    imageUrl: 'https://upload.wikimedia.org/wikipedia/en/f/f2/Moana_waialiki.jpg'
+    // Official Moana Art
+    imageUrl: `${PROXY}lumiere-a.akamaihd.net/v1/images/p_moana_20530_214883e3.jpeg${OPT}`
   },
   {
     id: 'rapunzel',
@@ -83,7 +94,8 @@ export const CHARACTERS: Character[] = [
     colorFrom: 'from-purple-400',
     colorTo: 'to-pink-300',
     icon: '👱‍♀️',
-    imageUrl: 'https://upload.wikimedia.org/wikipedia/en/6/69/Rapunzel_Tangled_cover_art.jpg'
+    // Tangled Poster Art
+    imageUrl: `${PROXY}lumiere-a.akamaihd.net/v1/images/p_tangled_20503_68616a22.jpeg${OPT}`
   },
   {
     id: 'buzz',
@@ -95,7 +107,8 @@ export const CHARACTERS: Character[] = [
     colorFrom: 'from-green-500',
     colorTo: 'to-purple-600',
     icon: '🚀',
-    imageUrl: 'https://upload.wikimedia.org/wikipedia/en/b/b4/Buzz_Lightyear.png'
+    // Lightyear (Movie) or Toy Story Realistic
+    imageUrl: `${PROXY}lumiere-a.akamaihd.net/v1/images/p_lightyear_disneyplus_21960_619098c7.jpeg${OPT}`
   },
   {
     id: 'mirabel',
@@ -107,7 +120,8 @@ export const CHARACTERS: Character[] = [
     colorFrom: 'from-teal-500',
     colorTo: 'to-pink-500',
     icon: '🦋',
-    imageUrl: 'https://upload.wikimedia.org/wikipedia/en/8/82/Mirabel_Madrigal.png'
+    // Encanto Poster
+    imageUrl: `${PROXY}lumiere-a.akamaihd.net/v1/images/p_encanto_homeent_22359_4892ae1c.jpeg${OPT}`
   },
   {
     id: 'mickey',
@@ -119,6 +133,7 @@ export const CHARACTERS: Character[] = [
     colorFrom: 'from-red-500',
     colorTo: 'to-blue-800',
     icon: '🪄',
-    imageUrl: 'https://upload.wikimedia.org/wikipedia/en/d/d4/Mickey_Mouse.png'
+    // Fantasia Sorcerer
+    imageUrl: `${PROXY}lumiere-a.akamaihd.net/v1/images/open-uri20150422-20810-10n7kwa_96109316.jpeg${OPT}`
   }
 ];
