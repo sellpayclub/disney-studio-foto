@@ -11,24 +11,43 @@ const App: React.FC = () => {
   const [showLanding, setShowLanding] = useState(false);
 
   useEffect(() => {
-    // Check path on mount safely
-    try {
-      const path = window.location.pathname;
-      // Aceita /landpage, /LandingPage ou qualquer variação que termine com isso
-      if (path === '/landpage' || path === '/LandingPage' || path.endsWith('/LandingPage') || path.endsWith('/landpage')) {
-        setShowLanding(true);
+    const checkRouting = () => {
+      try {
+        const path = window.location.pathname.toLowerCase();
+        const search = window.location.search.toLowerCase();
+        const hash = window.location.hash.toLowerCase();
+
+        // Verificação robusta para detectar a intenção de acessar a Landing Page
+        // Funciona com: /LandingPage, /landingpage, /?page=landing, /#landing
+        const isLandingRequest = 
+          path.includes('/landingpage') || 
+          path.includes('/landpage') ||
+          search.includes('landing') ||
+          hash.includes('landing');
+
+        if (isLandingRequest) {
+          setShowLanding(true);
+        }
+      } catch (e) {
+        console.warn("Routing check failed", e);
       }
-    } catch (e) {
-      console.warn("Routing check failed", e);
-    }
+    };
+
+    // Checa ao montar
+    checkRouting();
+
+    // Opcional: ouvir mudanças de histórico se houver navegação interna
+    window.addEventListener('popstate', checkRouting);
+    return () => window.removeEventListener('popstate', checkRouting);
   }, []);
 
   const handleGoToApp = () => {
     try {
-      // Safe navigation attempting to reset to root
-      window.history.pushState({}, '', '/');
+      // Tenta limpar a URL visualmente
+      if (window.history && window.history.pushState) {
+        window.history.pushState({}, '', '/');
+      }
     } catch (e) {
-      // Fallback if pushState is blocked
       console.warn("Navigation update failed", e);
     }
     setShowLanding(false);
