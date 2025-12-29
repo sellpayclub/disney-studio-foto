@@ -45,11 +45,13 @@ const compressImage = async (file: File): Promise<string> => {
 
 export const generateDisneyImage = async (
   imageFile: File,
-  character: Character,
-  apiKey: string
+  character: Character
 ): Promise<string> => {
+  // Agora usa estritamente a variável de ambiente
+  const apiKey = process.env.API_KEY;
+
   if (!apiKey) {
-    throw new Error("Chave de API necessária. Configure nas configurações (ícone de engrenagem).");
+    throw new Error("Erro de configuração no servidor (API Key ausente).");
   }
 
   const ai = new GoogleGenAI({ apiKey: apiKey });
@@ -70,7 +72,7 @@ export const generateDisneyImage = async (
       1. SUJEITO: Mantenha o rosto da criança da foto original. É fundamental que seja a MESMA criança, com as mesmas feições e expressões. Não gere uma criança nova.
       2. AÇÃO: Vista a criança da foto com o figurino: ${character.description}.
       3. CENÁRIO: Coloque a criança neste ambiente: ${character.environment}.
-      4. ESTILO: Fotografia realista (Live Action). A imagem deve parecer uma foto real de alta qualidade, não um desenho ou pintura.
+      4. ESTILO: Fotografia realista (Live Action) de alta qualidade cinematográfica.
       
       Resumo: Gere uma imagem realista da criança da foto vestida como ${character.name}.
     `;
@@ -120,7 +122,7 @@ export const generateDisneyImage = async (
     
     // Tratamento específico para erro de Cota (429)
     if (error.message && (error.message.includes("429") || error.message.includes("Quota") || error.message.includes("RESOURCE_EXHAUSTED"))) {
-      throw new Error("Cota excedida! 🚨 Muitas pessoas usando ao mesmo tempo. Clique na engrenagem ⚙️ no topo e use sua própria API Key do Google (é grátis) para continuar sem filas.");
+      throw new Error("Muitos pedidos mágicos ao mesmo tempo! 🪄 Por favor, aguarde alguns segundos e tente novamente.");
     }
 
     // Tratamento para imagem recusada (Safety)

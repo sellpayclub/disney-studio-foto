@@ -1,8 +1,5 @@
 import { Character } from './types';
 
-// Nota: As URLs abaixo são imagens temáticas do Unsplash para representar os personagens.
-// Você pode substituir por URLs de imagens oficiais se desejar.
-
 export const CHARACTERS: Character[] = [
   {
     id: 'elsa',
@@ -14,7 +11,7 @@ export const CHARACTERS: Character[] = [
     colorFrom: 'from-blue-400',
     colorTo: 'to-cyan-200',
     icon: '❄️',
-    imageUrl: 'https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=400&q=80'
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/en/5/5e/Elsa_from_Disney%27s_Frozen.png'
   },
   {
     id: 'woody',
@@ -26,7 +23,7 @@ export const CHARACTERS: Character[] = [
     colorFrom: 'from-yellow-600',
     colorTo: 'to-red-400',
     icon: '🤠',
-    imageUrl: 'https://images.unsplash.com/photo-1559563458-52c69c8e34ff?auto=format&fit=crop&w=400&q=80'
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/en/0/01/Sheriff_Woody.png'
   },
   {
     id: 'ariel',
@@ -38,7 +35,7 @@ export const CHARACTERS: Character[] = [
     colorFrom: 'from-teal-400',
     colorTo: 'to-purple-400',
     icon: '🧜‍♀️',
-    imageUrl: 'https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=400&q=80'
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/en/7/77/Ariel_disney.png'
   },
   {
     id: 'spiderman',
@@ -50,7 +47,7 @@ export const CHARACTERS: Character[] = [
     colorFrom: 'from-red-600',
     colorTo: 'to-blue-600',
     icon: '🕷️',
-    imageUrl: 'https://images.unsplash.com/photo-1635805737707-575885ab0820?auto=format&fit=crop&w=400&q=80'
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/en/2/21/Web_of_Spider-Man_Vol_1_129-1.png'
   },
   {
     id: 'ironman',
@@ -62,7 +59,7 @@ export const CHARACTERS: Character[] = [
     colorFrom: 'from-red-500',
     colorTo: 'to-yellow-500',
     icon: '🦾',
-    imageUrl: 'https://images.unsplash.com/photo-1623939044391-1fa1a48c6837?auto=format&fit=crop&w=400&q=80'
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/en/4/47/Iron_Man_%28circa_2018%29.png'
   },
   {
     id: 'moana',
@@ -74,7 +71,7 @@ export const CHARACTERS: Character[] = [
     colorFrom: 'from-orange-400',
     colorTo: 'to-teal-400',
     icon: '🌊',
-    imageUrl: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=400&q=80'
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/en/f/f2/Moana_waialiki.jpg'
   },
   {
     id: 'rapunzel',
@@ -86,7 +83,7 @@ export const CHARACTERS: Character[] = [
     colorFrom: 'from-purple-400',
     colorTo: 'to-pink-300',
     icon: '👱‍♀️',
-    imageUrl: 'https://images.unsplash.com/photo-1514539079130-25950c84af65?auto=format&fit=crop&w=400&q=80'
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/en/6/69/Rapunzel_Tangled_cover_art.jpg'
   },
   {
     id: 'buzz',
@@ -98,7 +95,7 @@ export const CHARACTERS: Character[] = [
     colorFrom: 'from-green-500',
     colorTo: 'to-purple-600',
     icon: '🚀',
-    imageUrl: 'https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=400&q=80'
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/en/b/b4/Buzz_Lightyear.png'
   },
   {
     id: 'mirabel',
@@ -110,7 +107,7 @@ export const CHARACTERS: Character[] = [
     colorFrom: 'from-teal-500',
     colorTo: 'to-pink-500',
     icon: '🦋',
-    imageUrl: 'https://images.unsplash.com/photo-1590073242678-cfe2f792d3c6?auto=format&fit=crop&w=400&q=80'
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/en/8/82/Mirabel_Madrigal.png'
   },
   {
     id: 'mickey',
@@ -122,6 +119,6 @@ export const CHARACTERS: Character[] = [
     colorFrom: 'from-red-500',
     colorTo: 'to-blue-800',
     icon: '🪄',
-    imageUrl: 'https://images.unsplash.com/photo-1541689221361-ad95003448dc?auto=format&fit=crop&w=400&q=80'
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/en/d/d4/Mickey_Mouse.png'
   }
 ];
